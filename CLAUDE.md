@@ -25,6 +25,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 6. **KeyboardHookManager.cs**: Windows keyboard hook implementation for Ctrl+Shift shortcut handling
 7. **SlideElementHelper.cs**: Inserts consulting slide elements (sticky, table, header, quote, status sticker, footnote) for Ctrl+Shift+letter shortcuts
 8. **ShapeToolsHelper.cs**: Arrange in grid, copy/paste position and size, and text tools (zero margins, autofit off, swap text, merge text boxes); each operation starts a new undo entry
+9. **SelectionHelper.cs**: Shared selection helpers (selected shapes incl. inside groups, group expansion, target table cells)
+10. **Color pane**:
+    - **ColorPaneManager.cs**: Creates one VSTO CustomTaskPane per document window (docked right) and toggles it; syncs panes on `WindowSelectionChange` (subscribed in ThisAddIn.cs)
+    - **ColorPaneControl.cs**: The pane's UserControl, built in code (no designer): Fill / Line / Text swatch rows and a line-weight TrackBar + NumericUpDown
+    - **FormatHelper.cs**: Applies fill / line / text color and line weight to the selection
+    - **PaletteStore.cs**: The palette (0xRRGGBB values) persisted in `HKCU\Software\Decksterity\Palette`; reads theme colors from a presentation or file
+    - **PaletteEditorForm.cs**: Dialog for editing / importing the palette
 
 ### Key Features
 

@@ -16,11 +16,27 @@ namespace decksterity
         {
             keyboardManager = new KeyboardHookManager();
             keyboardManager.InstallHook();
+
+            Application.WindowSelectionChange += Application_WindowSelectionChange;
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
+            Application.WindowSelectionChange -= Application_WindowSelectionChange;
             keyboardManager?.RemoveHook();
+        }
+
+        // Keeps the color pane's line-weight slider in step with the selection
+        private void Application_WindowSelectionChange(PowerPoint.Selection selection)
+        {
+            try
+            {
+                ColorPaneManager.OnSelectionChanged();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Color pane sync failed: {ex.Message}");
+            }
         }
 
 

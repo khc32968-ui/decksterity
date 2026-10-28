@@ -299,31 +299,15 @@ namespace decksterity
 
         #region Selection helpers
 
-        // Selected shapes in selection order; shapes picked inside a group are used individually
-        private static Shape[] GetSelectedShapes()
-        {
-            var selection = App.ActiveWindow.Selection;
-            if (selection.Type != PpSelectionType.ppSelectionShapes && selection.Type != PpSelectionType.ppSelectionText)
-            {
-                return new Shape[0];
-            }
-
-            var range = selection.HasChildShapeRange ? selection.ChildShapeRange : selection.ShapeRange;
-            var shapes = new Shape[range.Count];
-            for (int i = 0; i < range.Count; i++)
-            {
-                shapes[i] = range[i + 1];
-            }
-            return shapes;
-        }
+        private static Shape[] GetSelectedShapes() => SelectionHelper.GetSelectedShapes();
 
         // Selected shapes that can hold text, with whole groups expanded into their members
         private static List<Shape> GetSelectedTextShapes()
         {
             var result = new List<Shape>();
-            foreach (var shape in ExpandGroups(GetSelectedShapes()))
+            foreach (var shape in SelectionHelper.ExpandGroups(GetSelectedShapes()))
             {
-                if (shape.HasTextFrame == Office.MsoTriState.msoTrue && shape.HasTable != Office.MsoTriState.msoTrue)
+                if (shape.HasTextFrame == Office.MsoTriState.msoTrue && !SelectionHelper.IsTable(shape))
                 {
                     result.Add(shape);
                 }
@@ -335,13 +319,11 @@ namespace decksterity
         private static List<TextFrame> GetSelectedTextFrames()
         {
             var frames = new List<TextFrame>();
-            foreach (var shape in ExpandGroups(GetSelectedShapes()))
+            foreach (var shape in SelectionHelper.ExpandGroups(GetSelectedShapes()))
             {
-                if (shape.HasTable == Office.MsoTriState.msoTrue)
+                if (SelectionHelper.IsTable(shape))
                 {
-                    var cells = GetTableCells(shape.Table);
-                    var selectedCells = cells.Where(c => c.Selected).ToList();
-                    foreach (var cell in selectedCells.Count > 0 ? selectedCells : cells)
+                    foreach (var cell in SelectionHelper.GetTargetCells(shape.Table))
                     {
                         frames.Add(cell.Shape.TextFrame);
                     }
@@ -352,37 +334,6 @@ namespace decksterity
                 }
             }
             return frames;
-        }
-
-        private static List<Cell> GetTableCells(Table table)
-        {
-            var cells = new List<Cell>();
-            for (int row = 1; row <= table.Rows.Count; row++)
-            {
-                for (int column = 1; column <= table.Columns.Count; column++)
-                {
-                    cells.Add(table.Cell(row, column));
-                }
-            }
-            return cells;
-        }
-
-        private static IEnumerable<Shape> ExpandGroups(IEnumerable<Shape> shapes)
-        {
-            foreach (var shape in shapes)
-            {
-                if (shape.Type == Office.MsoShapeType.msoGroup)
-                {
-                    foreach (Shape member in shape.GroupItems)
-                    {
-                        yield return member;
-                    }
-                }
-                else
-                {
-                    yield return shape;
-                }
-            }
         }
 
         // Resizes without the aspect-ratio lock interfering; zero-size dimensions (straight lines) are left alone

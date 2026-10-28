@@ -100,6 +100,14 @@
 					<button id="ObjectsSwapPosition" imageMso="CircularReferences" label="Swap position" showLabel="false" keytip="psw" onAction="ObjectsSwapPositionCentered" />
 				</group>
 
+				<group id="GroupColors" label="Colors">
+					<button id="ToggleColorPane" imageMso="ShapeFillColorPicker" label="Color pane" screentip="Color pane" supertip="Show or hide the color pane: one-click palette colors for fill, line and text, and a line-weight slider." size="large" keytip="cl" onAction="ToggleColorPane" />
+					<menu id="PaletteMenu" label="Palette" keytip="pe">
+						<button id="EditPalette" label="Edit palette..." keytip="e" onAction="EditPalette" />
+						<button id="ImportPaletteFromPresentation" label="Use this presentation's theme" keytip="t" onAction="ImportPaletteFromPresentation" />
+					</menu>
+				</group>
+
 				<group id="GroupTools" label="Tools">
 					<button id="ArrangeInGrid" imageMso="TableInsert" label="Arrange in grid" screentip="Arrange in grid" supertip="Tile the selected shapes into rows and columns within the selection's width. Asks for the number of columns and the gap." size="large" keytip="gr" onAction="ArrangeInGrid" />
 					<button id="CopyPositionSize" imageMso="Copy" label="Copy position and size" screentip="Copy position and size" supertip="Remember the selected shape's position and size so you can apply them to other shapes, on any slide." keytip="cp" onAction="CopyPositionSize" />
