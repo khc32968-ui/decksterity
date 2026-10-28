@@ -133,6 +133,19 @@ namespace decksterity
         // Utility operation to swap positions of exactly two selected objects
         public void ObjectsSwapPositionCentered(Office.IRibbonControl control) { AlignmentHelper.ObjectsSwapPositionCentered(); }
 
+        // Layout tools: grid arrangement and copying position/size between shapes
+        public void ArrangeInGrid(Office.IRibbonControl control) { ShapeToolsHelper.ArrangeInGrid(); }
+        public void CopyPositionSize(Office.IRibbonControl control) { ShapeToolsHelper.CopyPositionAndSize(); }
+        public void PastePositionSize(Office.IRibbonControl control) { ShapeToolsHelper.PastePositionAndSize(true, true); }
+        public void PastePosition(Office.IRibbonControl control) { ShapeToolsHelper.PastePositionAndSize(true, false); }
+        public void PasteSize(Office.IRibbonControl control) { ShapeToolsHelper.PastePositionAndSize(false, true); }
+
+        // Text tools
+        public void ToggleZeroMargins(Office.IRibbonControl control) { ShapeToolsHelper.ToggleZeroMargins(); }
+        public void AutofitOff(Office.IRibbonControl control) { ShapeToolsHelper.AutofitOff(); }
+        public void SwapText(Office.IRibbonControl control) { ShapeToolsHelper.SwapText(); }
+        public void MergeTextBoxes(Office.IRibbonControl control) { ShapeToolsHelper.MergeTextBoxes(); }
+
         #endregion
 
         #region Helpers

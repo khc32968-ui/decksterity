@@ -23,6 +23,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 4. **ElementHelper.cs**: Centralized utility class for inserting all types of symbols into PowerPoint slides
 5. **AlignmentHelper.cs**: Comprehensive alignment, distribution, and spacing utilities for PowerPoint shapes
 6. **KeyboardHookManager.cs**: Windows keyboard hook implementation for Ctrl+Shift shortcut handling
+7. **SlideElementHelper.cs**: Inserts consulting slide elements (sticky, table, header, quote, status sticker, footnote) for Ctrl+Shift+letter shortcuts
+8. **ShapeToolsHelper.cs**: Arrange in grid, copy/paste position and size, and text tools (zero margins, autofit off, swap text, merge text boxes); each operation starts a new undo entry
 
 ### Key Features
 

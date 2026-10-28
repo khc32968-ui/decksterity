@@ -100,6 +100,22 @@
 					<button id="ObjectsSwapPosition" imageMso="CircularReferences" label="Swap position" showLabel="false" keytip="psw" onAction="ObjectsSwapPositionCentered" />
 				</group>
 
+				<group id="GroupTools" label="Tools">
+					<button id="ArrangeInGrid" imageMso="TableInsert" label="Arrange in grid" screentip="Arrange in grid" supertip="Tile the selected shapes into rows and columns within the selection's width. Asks for the number of columns and the gap." size="large" keytip="gr" onAction="ArrangeInGrid" />
+					<button id="CopyPositionSize" imageMso="Copy" label="Copy position and size" screentip="Copy position and size" supertip="Remember the selected shape's position and size so you can apply them to other shapes, on any slide." keytip="cp" onAction="CopyPositionSize" />
+					<menu id="PastePositionSizeMenu" imageMso="Paste" label="Paste position / size" keytip="vp">
+						<button id="PastePositionSize" label="Paste position and size" keytip="b" onAction="PastePositionSize" />
+						<button id="PastePosition" label="Paste position only" keytip="p" onAction="PastePosition" />
+						<button id="PasteSize" label="Paste size only" keytip="s" onAction="PasteSize" />
+					</menu>
+					<menu id="TextToolsMenu" imageMso="TextBoxInsert" label="Text tools" keytip="tt">
+						<button id="ToggleZeroMargins" label="Zero text margins (toggle)" keytip="z" onAction="ToggleZeroMargins" />
+						<button id="AutofitOff" label="Turn off autofit" keytip="a" onAction="AutofitOff" />
+						<button id="SwapText" label="Swap text of two shapes" keytip="s" onAction="SwapText" />
+						<button id="MergeTextBoxes" label="Merge text boxes" keytip="m" onAction="MergeTextBoxes" />
+					</menu>
+				</group>
+
 			</tab>
 
 			<!-- Second tab with primary-arrange tools on their own access key (e.g. Alt-P-SW swap, Alt-P-AL primary align left) -->

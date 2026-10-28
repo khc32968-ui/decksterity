@@ -36,6 +36,14 @@ To update to a newer version, simply download and install the latest release. Th
 - **Advanced Spacing**: Resize and space evenly with preservation options (similar to ASL)
 - **Primary Alignment**: Align all objects relative to the first selected object
 - **Position Swapping**: Swap positions of two selected objects
+- **Arrange in Grid** (`Alt-X-GR`): Tile the selected shapes into rows and columns within the selection's width, with a gap you choose; shapes keep their heights and are placed in reading order
+- **Copy / Paste Position and Size** (`Alt-X-CP`, then `Alt-X-VP`): Copy one shape's position and size and apply both, or just one, to other shapes on any slide
+
+### Text Tools (`Alt-X-TT`)
+- **Zero text margins** (`Z`): Set text insets to zero on text shapes and table cells; run again to restore PowerPoint's defaults
+- **Turn off autofit** (`A`): Stop text boxes from shrinking text or resizing to fit
+- **Swap text** (`S`): Swap the text of two shapes, each keeping its own formatting
+- **Merge text boxes** (`M`): Combine the selected text boxes into the top-most one, keeping character formatting and bullets
 
 
 ## Miscellaneous
