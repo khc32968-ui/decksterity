@@ -126,7 +126,7 @@
 
 			</tab>
 
-			<!-- Second tab so Bain Toolbox "Alt-P" shortcuts (e.g. Alt-P-SW swap, Alt-P-AL primary align left) work as-is -->
+			<!-- Second tab with primary-arrange tools on their own access key (e.g. Alt-P-SW swap, Alt-P-AL primary align left) -->
 			<tab id="TabDecksterityPrimary" insertBeforeMso="TabHome" label="Primary" keytip="P">
 				<group id="GroupPrimaryArrange" label="Primary arrange">
 					<button id="PTabPrimaryAlignLeft" imageMso="ObjectsAlignLeft" label="Primary align left" showLabel="false" keytip="al" onAction="PrimaryAlignLeft" />

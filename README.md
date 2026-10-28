@@ -1,7 +1,7 @@
 # Decksterity
 
 Decksterity is a free and open source PowerPoint add-in that aims to replicate core consulting toolbar elements, 
-inspired by add-ins like [Instrumenta](https://github.com/iappyx/Instrumenta) or [Design Toolbars](https://designtoolbars.com). While Decksterity is more limited than both of these options, it includes the elements and alignment tools that I most frequently leverage conveniently centralized to one ribbon tab with familiar, easily learned hotkeys (which will be most familiar to Bain Toolbox users). 
+inspired by add-ins like [Instrumenta](https://github.com/iappyx/Instrumenta) or [Design Toolbars](https://designtoolbars.com). While Decksterity is more limited than both of these options, it includes the elements and alignment tools that I most frequently leverage conveniently centralized to one ribbon tab with familiar, easily learned hotkeys modeled on common consulting toolbars. 
 
 Decksterity works best when combined with [**think-cell**](https://www.think-cell.com/en) to provide key missing consulting toolbox functionality - e.g., charts and graphs, agenda slides, chevrons, save/send slides, and much more. Additionally, Decksterity will be more useful if you invest in creating a [PowerPoint template](https://support.microsoft.com/en-us/office/create-and-save-a-powerpoint-template-ee4429ad-2a74-4100-82f7-50f8169c8aca) and [think-cell style file](https://www.think-cell.com/en/resources/manual/customization) suited to your needs. 
 
@@ -40,7 +40,7 @@ To update to a newer version, simply download and install the latest release. Th
 - **Copy / Paste Position and Size** (`Alt-X-CP`, then `Alt-X-VP`): Copy one shape's position and size and apply both, or just one, to other shapes on any slide
 
 ### Color Pane (`Alt-X-CL`)
-A pane docked on the right with one-click colors, similar to the Bain Toolbox task pane:
+A pane docked on the right with one-click colors:
 - **Fill / Line / Text rows**: click a palette color to apply it to the selected shapes (or highlighted text, or selected table cells). Each row also has *no fill* / *no line* and a `...` button for any other color
 - **Line weight slider**: drag to set the outline weight of the selected shapes in 0.25 pt steps (0 removes the line), or type an exact value; it follows the current selection
 - **Palette**: a fixed set of colors taken from a presentation's theme (the first time the pane opens, it uses the open presentation's theme). Change it from **Edit palette...** in the pane or the **Palette** menu (`Alt-X-PE`): add, change, reorder or remove colors, add the selected shape's color, or re-import a theme from the open presentation or any .pptx / .potx file. The palette is saved and stays the same across presentations until you change it
@@ -53,9 +53,9 @@ A pane docked on the right with one-click colors, similar to the Bain Toolbox ta
 
 ### Keyboard shortcuts
 
-- **Access keys (alt shortcuts)**: Each function is tagged to access keys that will be most familiar to Bain Toolbox users - e.g., `Alt-X-AL` for aligning left; in order to keep this one tab, primary aligns will fall into the same first-level access key (e.g., `Alt-P-AL` from Bain Toolbox becomes `Alt-X-PAL`)
-- **Primary tab (`Alt-P`)**: a second tab mirrors the Bain Toolbox `Alt-P` shortcuts - `Alt-P-SW` swaps positions, `Alt-P-AL`/`AC`/`AR`/`AT`/`AM`/`AB` primary-align. If PowerPoint's Record tab is enabled it takes `P`; hide it under File > Options > Customize Ribbon to free the key
-- **Control keys**: Decksterity provides the same control hotkeys as the Bain Toolbox:
+- **Access keys (alt shortcuts)**: Each function is tagged to an access key - e.g., `Alt-X-AL` for aligning left; to keep everything on one tab, primary aligns share the same first-level access key (e.g., `Alt-X-PAL` for primary align left)
+- **Primary tab (`Alt-P`)**: a second tab puts the primary-arrange tools on their own access key - `Alt-P-SW` swaps positions, `Alt-P-AL`/`AC`/`AR`/`AT`/`AM`/`AB` primary-align. If PowerPoint's Record tab is enabled it takes `P`; hide it under File > Options > Customize Ribbon to free the key
+- **Control keys**: Decksterity provides these control hotkeys:
 
 | Shortcut | Action |
 | --- | --- |
