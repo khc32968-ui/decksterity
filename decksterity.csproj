@@ -185,6 +185,16 @@
     <Compile Include="KeyboardHookManager.cs" />
     <Compile Include="SlideElementHelper.cs" />
     <Compile Include="ShapeToolsHelper.cs" />
+    <Compile Include="SelectionHelper.cs" />
+    <Compile Include="FormatHelper.cs" />
+    <Compile Include="PaletteStore.cs" />
+    <Compile Include="ColorPaneManager.cs" />
+    <Compile Include="ColorPaneControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PaletteEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

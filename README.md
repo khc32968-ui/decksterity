@@ -39,6 +39,12 @@ To update to a newer version, simply download and install the latest release. Th
 - **Arrange in Grid** (`Alt-X-GR`): Tile the selected shapes into rows and columns within the selection's width, with a gap you choose; shapes keep their heights and are placed in reading order
 - **Copy / Paste Position and Size** (`Alt-X-CP`, then `Alt-X-VP`): Copy one shape's position and size and apply both, or just one, to other shapes on any slide
 
+### Color Pane (`Alt-X-CL`)
+A pane docked on the right with one-click colors, similar to the Bain Toolbox task pane:
+- **Fill / Line / Text rows**: click a palette color to apply it to the selected shapes (or highlighted text, or selected table cells). Each row also has *no fill* / *no line* and a `...` button for any other color
+- **Line weight slider**: drag to set the outline weight of the selected shapes in 0.25 pt steps (0 removes the line), or type an exact value; it follows the current selection
+- **Palette**: a fixed set of colors taken from a presentation's theme (the first time the pane opens, it uses the open presentation's theme). Change it from **Edit palette...** in the pane or the **Palette** menu (`Alt-X-PE`): add, change, reorder or remove colors, add the selected shape's color, or re-import a theme from the open presentation or any .pptx / .potx file. The palette is saved and stays the same across presentations until you change it
+
 ### Text Tools (`Alt-X-TT`)
 - **Zero text margins** (`Z`): Set text insets to zero on text shapes and table cells; run again to restore PowerPoint's defaults
 - **Turn off autofit** (`A`): Stop text boxes from shrinking text or resizing to fit

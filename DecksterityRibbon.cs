@@ -140,6 +140,11 @@ namespace decksterity
         public void PastePosition(Office.IRibbonControl control) { ShapeToolsHelper.PastePositionAndSize(true, false); }
         public void PasteSize(Office.IRibbonControl control) { ShapeToolsHelper.PastePositionAndSize(false, true); }
 
+        // Color pane and its palette
+        public void ToggleColorPane(Office.IRibbonControl control) { ColorPaneManager.Toggle(); }
+        public void EditPalette(Office.IRibbonControl control) { PaletteEditorForm.ShowEditor(); }
+        public void ImportPaletteFromPresentation(Office.IRibbonControl control) { PaletteEditorForm.ImportFromActivePresentation(); }
+
         // Text tools
         public void ToggleZeroMargins(Office.IRibbonControl control) { ShapeToolsHelper.ToggleZeroMargins(); }
         public void AutofitOff(Office.IRibbonControl control) { ShapeToolsHelper.AutofitOff(); }
