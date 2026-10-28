@@ -7,7 +7,6 @@
 				<group id="GroupDecksterityInsert" label="Insert">
 					<gallery idMso="SlideNewGalleryInsert" size="large" keytip="isl" />
 					<gallery idMso="TableInsertGallery" size="large" keytip="it" />
-					<gallery idMso="ShapesInsertGallery" size="large" />
 					<button idMso="IconInsertFromFile" size="large" keytip="ii" />
 					<gallery idMso="ShapeFillColorPicker" size="large" keytip="sf" />
 				</group>
@@ -96,11 +95,25 @@
 
 					<separator id="ArrangeSeparate4" />
 
-					<button id="ObjectsSameHeight" imageMso="RowHeight" label="Set same height" showLabel="false" keytip="ssh" onAction="SameHeight" />
-					<button id="ObjectsSameWidth" imageMso="ColumnWidth" label="Set same width" showLabel="false" keytip="ssw" onAction="SameWidth" />
+					<button id="ObjectsSameHeight" imageMso="RowHeight" label="Set same height" showLabel="false" keytip="sh" onAction="SameHeight" />
+					<button id="ObjectsSameWidth" imageMso="ColumnWidth" label="Set same width" showLabel="false" keytip="sw" onAction="SameWidth" />
 					<button id="ObjectsSwapPosition" imageMso="CircularReferences" label="Swap position" showLabel="false" keytip="psw" onAction="ObjectsSwapPositionCentered" />
 				</group>
-				
+
+			</tab>
+
+			<!-- Second tab with primary-arrange tools on their own access key (e.g. Alt-P-SW swap, Alt-P-AL primary align left) -->
+			<tab id="TabDecksterityPrimary" insertBeforeMso="TabHome" label="Primary" keytip="P">
+				<group id="GroupPrimaryArrange" label="Primary arrange">
+					<button id="PTabPrimaryAlignLeft" imageMso="ObjectsAlignLeft" label="Primary align left" showLabel="false" keytip="al" onAction="PrimaryAlignLeft" />
+					<button id="PTabPrimaryAlignBottom" imageMso="ObjectsAlignBottom" label="Primary align bottom" showLabel="false" keytip="ab" onAction="PrimaryAlignBottom" />
+					<button id="PTabPrimaryAlignCenter" imageMso="ObjectsAlignCenterHorizontal" label="Primary align center" showLabel="false" keytip="ac" onAction="PrimaryAlignCenter" />
+					<button id="PTabPrimaryAlignMiddle" imageMso="ObjectsAlignMiddleVertical" label="Primary align middle" showLabel="false" keytip="am" onAction="PrimaryAlignMiddle" />
+					<button id="PTabPrimaryAlignRight" imageMso="ObjectsAlignRight" label="Primary align right" showLabel="false" keytip="ar" onAction="PrimaryAlignRight" />
+					<button id="PTabPrimaryAlignTop" imageMso="ObjectsAlignTop" label="Primary align top" showLabel="false" keytip="at" onAction="PrimaryAlignTop" />
+					<separator id="PrimaryArrangeSeparate1" />
+					<button id="PTabObjectsSwapPosition" imageMso="CircularReferences" label="Swap position" showLabel="false" keytip="sw" onAction="ObjectsSwapPositionCentered" />
+				</group>
 			</tab>
 		</tabs>
 	</ribbon>

@@ -183,6 +183,7 @@
     <Compile Include="AlignmentHelper.cs" />
     <Compile Include="ElementHelper.cs" />
     <Compile Include="KeyboardHookManager.cs" />
+    <Compile Include="SlideElementHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

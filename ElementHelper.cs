@@ -205,7 +205,7 @@ namespace decksterity
 
         // Converts RGB color format to BGR format required by PowerPoint COM API
         // PowerPoint internally uses BGR instead of standard RGB format
-        private static int ConvertRgbToBgr(int rgbColor)
+        internal static int ConvertRgbToBgr(int rgbColor)
         {
             // Step 1: Extract RGB components from input color
             int r = (rgbColor >> 16) & 0xFF;

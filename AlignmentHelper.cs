@@ -280,6 +280,58 @@ namespace decksterity
             }
         }
 
+        // Brings selected shapes to the front of the z-order
+        public static void BringToFront()
+        {
+            var selection = GetActiveSelection();
+            if (selection.Type == PpSelectionType.ppSelectionShapes)
+            {
+                selection.ShapeRange.ZOrder(Office.MsoZOrderCmd.msoBringToFront);
+            }
+        }
+
+        // Sends selected shapes to the back of the z-order
+        public static void SendToBack()
+        {
+            var selection = GetActiveSelection();
+            if (selection.Type == PpSelectionType.ppSelectionShapes)
+            {
+                selection.ShapeRange.ZOrder(Office.MsoZOrderCmd.msoSendToBack);
+            }
+        }
+
+        // Resize increments in points: 0.05" for Ctrl+Arrow, 0.01" (PowerPoint's displayed precision) with Shift
+        public const float ResizeStep = 3.6f;
+        public const float FineResizeStep = 0.72f;
+
+        // Grows or shrinks each selected shape by the given deltas, keeping its top-left corner fixed
+        // Returns false when no shapes are selected so the keystroke can fall through to PowerPoint
+        public static bool ResizeSelection(float deltaWidth, float deltaHeight)
+        {
+            var selection = GetActiveSelection();
+            if (selection.Type != PpSelectionType.ppSelectionShapes) return false;
+
+            var shapeRange = selection.HasChildShapeRange ? selection.ChildShapeRange : selection.ShapeRange;
+            foreach (Shape shape in shapeRange)
+            {
+                var lockAspectRatio = shape.LockAspectRatio;
+                shape.LockAspectRatio = Office.MsoTriState.msoFalse;
+
+                // Zero-size dimensions (e.g. straight lines) are left alone so lines don't turn diagonal
+                if (deltaWidth != 0 && shape.Width > 0)
+                {
+                    shape.Width = Math.Max(FineResizeStep, shape.Width + deltaWidth);
+                }
+                if (deltaHeight != 0 && shape.Height > 0)
+                {
+                    shape.Height = Math.Max(FineResizeStep, shape.Height + deltaHeight);
+                }
+
+                shape.LockAspectRatio = lockAspectRatio;
+            }
+            return true;
+        }
+
         // Advanced resize and spacing with multiple algorithms and user input
         // Supports even spacing, preserve first/last, horizontal/vertical modes
         public static void ResizeAndSpaceEvenly(string spacingType)
