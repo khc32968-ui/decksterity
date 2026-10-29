@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Decksterity** is a Microsoft PowerPoint VSTO (Visual Studio Tools for Office) add-in that provides enhanced slide elements and layout tools. The add-in creates a custom ribbon with two tabs: "Decksterity" and "Decksterity Expert", offering a comprehensive suite of visual elements and formatting tools.
+**Decksterity** is a Microsoft PowerPoint VSTO (Visual Studio Tools for Office) add-in that provides enhanced slide elements and layout tools. The add-in creates a custom ribbon with two tabs: "Decksterity" (elements, arrange, colors, tools) and "Primary" (primary-arrange tools on the Alt-P access key), plus a docked color pane.
 
 ## Technology Stack
 
@@ -55,8 +55,9 @@ decksterity/
 ├── assets/                 # PNG icons for ribbon buttons
 │   └── generators/         # Jupyter notebooks for icon generation
 ├── Properties/             # Assembly info and resources
-├── .github/workflows/      # GitHub Actions for automated deployment
-│   └── release.yml         # MSI deployment workflow
+├── Setup/                  # WiX v5 per-user installer (Package.wxs, DecksteritySetup.wixproj)
+├── scripts/                # make-signing-cert.ps1 (local signing certificate)
+├── build.bat               # Builds the add-in and the installer into dist/
 ├── README.md              # Public documentation and installation guide
 └── CLAUDE.md              # Development guidance for Claude Code
 ```
@@ -65,13 +66,7 @@ decksterity/
 
 ### Building the Project
 
-```bash
-# Build in Debug mode
-msbuild decksterity.sln /p:Configuration=Debug
-
-# Build in Release mode  
-msbuild decksterity.sln /p:Configuration=Release
-```
+Run `build.bat` (see Deployment & Distribution below). It signs the manifests with a local certificate, which plain `msbuild decksterity.sln` can't do because the csproj names the original author's certificate.
 
 ### Visual Studio Commands
 
@@ -225,32 +220,25 @@ KeyboardHookManager.RemoveHook()     // Clean up on shutdown
 
 ## Deployment & Distribution
 
-### MSI Installer Package
-The project uses MSI installer with Visual Studio Setup Project:
+### Building
+`build.bat` (repository root) does the whole build and logs to `build.log`:
 
-- **Distribution**: MSI packages via GitHub Releases
-- **Installation**: Windows Installer technology with registry entries
-- **VSTO Registration**: Automatic registry setup for add-in discovery
-- **Prerequisites**: .NET Framework 4.7.2, VSTO Runtime, PowerPoint 2016+
+1. Finds MSBuild with `vswhere` (Visual Studio 2022 or VS 2022 Build Tools with the Office/SharePoint build tools workload)
+2. Gets the thumbprint of a self-signed "Decksterity (local build)" code-signing certificate from `scripts\make-signing-cert.ps1`, creating it in `Cert:\CurrentUser\My` if needed. The csproj's own `ManifestCertificateThumbprint` belongs to the original author's certificate, so build.bat overrides it (`/p:ManifestKeyFile= /p:ManifestCertificateThumbprint=...`)
+3. Rebuilds `decksterity.csproj` (Release) into `bin\Release`
+4. Builds `Setup\DecksteritySetup.wixproj` (WiX v5 SDK, restored from NuGet) into `dist\DecksteritySetup-<version>.msi`
 
-### GitHub Actions Workflow
-Automated build and release process (`.github/workflows/release.yml`):
+The version lives in `build.bat` (`VERSION`), `Properties\AssemblyInfo.cs` and the csproj's `ApplicationVersion`; bump all three for a release.
 
-1. **Project Build**: Compiles solution and setup project in Release configuration
-2. **MSI Generation**: Visual Studio Setup Project creates MSI installer
-3. **Version Management**: Extracts version from tags or uses date-based versioning
-4. **GitHub Release**: Publishes MSI package to GitHub Releases with installation instructions
+### MSI Installer (`Setup\Package.wxs`)
+- **Per-user** install (`Scope="perUser"`, no admin rights) to `%LOCALAPPDATA%\Decksterity`
+- Registers the add-in under `HKCU\Software\Microsoft\Office\PowerPoint\Addins\decksterity` with `Manifest = file:///<install folder>decksterity.vsto|vstolocal`
+- HKCU matters: Office never shows the VSTO trust prompt for HKLM-registered add-ins, so a self-signed add-in registered there silently fails to load. Per-user, Office asks once ("Install") on first start
+- `MajorUpgrade` with a fixed UpgradeCode, so installing a newer version replaces the old one
+- Launch condition requires .NET Framework 4.5+ (Windows 10/11 ship 4.7.2+)
 
-### Manual Release Trigger
-- **Workflow**: Triggered manually via GitHub Actions "workflow_dispatch" or on version tags
-- **Tag-based releases**: Push tags like `v1.0.0` for versioned releases  
-- **Manual releases**: Use workflow_dispatch for development/testing releases
-
-### Installer Components
-- **decksterity.msi**: Windows Installer package with registry entries
-- **Setup Project**: Visual Studio installer project with VSTO registration
-- **Registry Entries**: HKLM\SOFTWARE\Microsoft\Office\PowerPoint\Addins\decksterity
-- **VSTO Files**: Main add-in DLL, manifest, and dependencies
+### Releases
+Releases are published by hand on GitHub (fork: khc32968-ui/decksterity) with the MSI from `dist\` attached. There is no CI workflow: VSTO builds need Windows with the Office build tools and a signing certificate.
 
 ## Current Status
 
@@ -261,6 +249,7 @@ Automated build and release process (`.github/workflows/release.yml`):
 - ✅ **Layout Tools**: Fully implemented with comprehensive alignment and spacing features
 - ✅ **Font Preservation**: Advanced system for maintaining user formatting
 - ✅ **Color Support**: Full color support across all contexts
-- ✅ **MSI Installer**: Professional Windows Installer with VSTO registry setup
-- ✅ **Keyboard Shortcuts**: Ctrl+Shift+1-6 shortcuts for rapid alignment operations
-- ✅ **Public Distribution**: MSI distribution via GitHub Releases with automated packaging
+- ✅ **MSI Installer**: Per-user WiX installer built by build.bat
+- ✅ **Keyboard Shortcuts**: Ctrl+Shift shortcuts for alignment, ordering, resizing and inserting elements
+- ✅ **Color Pane**: Palette swatches for fill / line / text and a line-weight slider
+- ✅ **Public Distribution**: MSI attached to GitHub Releases

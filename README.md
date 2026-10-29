@@ -10,16 +10,21 @@ Decksterity works best when combined with [**think-cell**](https://www.think-cel
 
 ## Install
 
-**[Download the latest release](https://github.com/avirut/decksterity/releases/latest)**
+**[Download the latest release](https://github.com/khc32968-ui/decksterity/releases/latest)**
 
-### Installation Steps:
-1. **Download** the latest `DecksteritySetup.msi` from the latest release from the above link
-2. **Run** the installer -- you may see prompts about access / certificates when doing this, but should be feasible to get through
-3. **Follow** the installation prompts
-4. **Start PowerPoint** to use the add-in!
+1. **Close PowerPoint**, then download `DecksteritySetup-<version>.msi` from the latest release
+2. **Run** it. It installs for your Windows user only, so it doesn't need administrator rights. Because the installer isn't signed by a known publisher, Windows may show "Windows protected your PC": choose **More info → Run anyway**
+3. **Start PowerPoint**. The first time, Office asks whether to install the Decksterity customization from an unverified publisher: choose **Install**. The **Decksterity** and **Primary** tabs then appear on the ribbon
 
-### Updating:
-To update to a newer version, simply download and install the latest release. The installer will handle upgrading your existing installation.
+Requirements: Windows 10 or 11 with desktop PowerPoint 2016 or later (Microsoft 365 is fine) and the .NET Framework 4.7.2 or later (included in current Windows).
+
+**Updating**: run the newer installer; it replaces the old version. **Uninstalling**: Settings → Apps → Installed apps → *Decksterity PowerPoint Add-in* → Uninstall.
+
+**If the tabs don't appear**: make sure PowerPoint was fully closed while installing, then check File → Options → Add-ins → *Manage: COM Add-ins* → Go, and tick *Decksterity PowerPoint Add-in*. If Office reports that the Visual Studio Tools for Office runtime is missing, install Microsoft's free [Visual Studio 2010 Tools for Office Runtime](https://www.microsoft.com/download/details.aspx?id=105522) and start PowerPoint again.
+
+### Building from source
+
+Needs Visual Studio 2022 or the [VS 2022 Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022) with the **Office/SharePoint build tools** workload. Double-click `build.bat` (or run it from a command prompt): it builds and signs the add-in into `bin\Release` and the installer into `dist\DecksteritySetup-<version>.msi`, logging to `build.log`. The first run downloads the WiX installer SDK from NuGet. The add-in's manifests are signed with a self-signed "Decksterity (local build)" certificate that `scripts\make-signing-cert.ps1` creates in your personal certificate store if you don't have one yet.
 
 ## Features
 

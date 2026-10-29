@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Per-user installer for the Decksterity PowerPoint add-in (WiX v5).
+  Installs to %LOCALAPPDATA%\Decksterity and registers the add-in for the current user only,
+  so no administrator rights are needed. Built by build.bat; see README.md.
+
+  Per-user (HKCU) registration matters: for add-ins registered under HKLM, Office never shows
+  the trust prompt and silently skips add-ins signed with a self-signed certificate.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="Decksterity PowerPoint Add-in"
+           Manufacturer="Decksterity"
+           Version="$(var.Version)"
+           UpgradeCode="46653388-8664-4963-B4D0-24192C6D0A4A"
+           Scope="perUser"
+           Language="1033">
+
+    <SummaryInformation Description="Decksterity PowerPoint Add-in" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Decksterity is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Property Id="ARPHELPLINK" Value="https://github.com/khc32968-ui/decksterity" />
+    <Property Id="ARPNOMODIFY" Value="1" />
+    <Property Id="ARPNOREPAIR" Value="1" />
+
+    <!-- .NET Framework 4.5+ writes this value; Windows 10 (1803+) and 11 ship 4.7.2 or later -->
+    <Property Id="NETFX4RELEASE">
+      <RegistrySearch Id="NetFx4Release" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Name="Release" Type="raw" />
+    </Property>
+    <Launch Condition="Installed OR NETFX4RELEASE"
+            Message="Decksterity needs the .NET Framework 4.7.2 or later. Install it from https://dotnet.microsoft.com/download/dotnet-framework and run this installer again." />
+
+    <StandardDirectory Id="LocalAppDataFolder">
+      <Directory Id="INSTALLFOLDER" Name="Decksterity" />
+    </StandardDirectory>
+
+    <ComponentGroup Id="AddinComponents" Directory="INSTALLFOLDER">
+      <Component Id="AddinFiles" Guid="6F1C2B7E-3D4A-4E5F-9A1B-2C3D4E5F6A7B">
+        <!-- Per-user components need a HKCU key path -->
+        <RegistryValue Root="HKCU" Key="Software\Decksterity" Name="InstallFolder" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
+        <File Id="DecksterityDll" Source="$(var.AddinDir)decksterity.dll" />
+        <File Id="DecksterityDllManifest" Source="$(var.AddinDir)decksterity.dll.manifest" />
+        <File Id="DecksterityVsto" Source="$(var.AddinDir)decksterity.vsto" />
+        <File Id="VstoUtilities" Source="$(var.AddinDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll" />
+        <RemoveFolder Id="RemoveInstallFolder" On="uninstall" />
+      </Component>
+
+      <Component Id="PowerPointRegistration" Guid="8A2D3C4B-5E6F-4A7B-8C9D-0E1F2A3B4C5D">
+        <RegistryKey Root="HKCU" Key="Software\Microsoft\Office\PowerPoint\Addins\decksterity">
+          <RegistryValue Name="FriendlyName" Type="string" Value="Decksterity PowerPoint Add-in" />
+          <RegistryValue Name="Description" Type="string" Value="Enhanced slide elements and layout tools for PowerPoint" />
+          <RegistryValue Name="LoadBehavior" Type="integer" Value="3" />
+          <RegistryValue Name="Manifest" Type="string" Value="file:///[INSTALLFOLDER]decksterity.vsto|vstolocal" KeyPath="yes" />
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+
+    <Feature Id="Main" Title="Decksterity" Level="1">
+      <ComponentGroupRef Id="AddinComponents" />
+    </Feature>
+  </Package>
+</Wix>

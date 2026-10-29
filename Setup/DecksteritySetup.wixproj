@@ -1,0 +1,14 @@
+<Project Sdk="WixToolset.Sdk/5.0.2">
+  <!--
+    Builds dist\DecksteritySetup-<version>.msi from the add-in in bin\Release.
+    Run build.bat at the repository root rather than building this directly: it builds and signs the add-in first.
+    The WiX SDK is downloaded from NuGet on the first build (needs internet access).
+  -->
+  <PropertyGroup>
+    <DecksterityVersion Condition="'$(DecksterityVersion)' == ''">1.1.0</DecksterityVersion>
+    <AddinDir Condition="'$(AddinDir)' == ''">$(MSBuildThisFileDirectory)..\bin\Release\</AddinDir>
+    <OutputName>DecksteritySetup-$(DecksterityVersion)</OutputName>
+    <OutputPath>$(MSBuildThisFileDirectory)..\dist\</OutputPath>
+    <DefineConstants>Version=$(DecksterityVersion);AddinDir=$(AddinDir)</DefineConstants>
+  </PropertyGroup>
+</Project>

@@ -32,7 +32,8 @@
     <SignManifests>true</SignManifests>
     <ProductName>Decksterity</ProductName>
     <PublisherName>Decksterity</PublisherName>
-    <SupportUrl>https://github.com/avirut/decksterity</SupportUrl>
+    <SupportUrl>https://github.com/khc32968-ui/decksterity</SupportUrl>
+    <ApplicationVersion>1.1.0.0</ApplicationVersion>
     <FriendlyName>Decksterity PowerPoint Add-in</FriendlyName>
     <OfficeApplicationDescription>Enhanced slide elements and layout tools for PowerPoint</OfficeApplicationDescription>
     <LoadBehavior>3</LoadBehavior>
