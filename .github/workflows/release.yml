@@ -1,0 +1,57 @@
+name: Build installer
+
+# Builds the add-in and DecksteritySetup-<version>.msi with build.bat on a Windows runner,
+# then publishes them as a GitHub release (v<version>, taken from build.bat).
+# Run it from the Actions tab ("Run workflow"), or push a tag like v1.2.0.
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    # windows-2022 ships Visual Studio 2022 with the Office/SharePoint (VSTO) workload
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build add-in and installer
+        shell: cmd
+        run: build.bat
+
+      - name: Show build log
+        if: always()
+        shell: cmd
+        run: if exist build.log type build.log
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: DecksteritySetup
+          path: dist/*.msi
+          if-no-files-found: error
+
+      - name: Publish release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          msi=$(ls dist/DecksteritySetup-*.msi | head -n 1)
+          version=${msi#dist/DecksteritySetup-}
+          version=${version%.msi}
+          tag="v$version"
+          notes="Per-user installer for Decksterity $version (no administrator rights needed).
+
+          1. Close PowerPoint, then run \`$(basename "$msi")\`. If Windows shows \"Windows protected your PC\", choose **More info → Run anyway**.
+          2. Start PowerPoint. The first time, Office asks whether to install the Decksterity customization from an unverified publisher: choose **Install**.
+
+          See the README for troubleshooting."
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" "$msi" --clobber
+          else
+            gh release create "$tag" "$msi" --title "$tag" --notes "$notes" --target "$GITHUB_SHA" --latest
+          fi
