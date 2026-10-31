@@ -124,6 +124,11 @@
 					</menu>
 				</group>
 
+				<group id="GroupAgenda" label="Agenda">
+					<button id="InsertOrUpdateAgenda" imageMso="SectionAdd" label="Agenda" screentip="Agenda (Ctrl+Shift+F)" supertip="No agenda yet: inserts an agenda slide. Fewer agenda slides than rows: duplicates the current agenda slide until there is one per row. Otherwise: copies the current agenda's rows to every agenda slide and moves the highlight to row 1, 2, 3... in slide order." size="large" keytip="ag" onAction="InsertOrUpdateAgenda" />
+					<button id="EditAgendaColors" imageMso="ShapeFillColorPicker" label="Agenda colors..." screentip="Agenda colors" supertip="Change the marker, line, highlight, text and divider colors for new agenda slides, and optionally recolor this presentation's agenda slides." keytip="ay" onAction="EditAgendaColors" />
+				</group>
+
 			</tab>
 
 			<!-- Second tab with primary-arrange tools on their own access key (e.g. Alt-P-SW swap, Alt-P-AL primary align left) -->

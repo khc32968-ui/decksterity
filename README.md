@@ -56,6 +56,14 @@ A pane docked on the right with one-click colors:
 - **Swap text** (`S`): Swap the text of two shapes, each keeping its own formatting
 - **Merge text boxes** (`M`): Combine the selected text boxes into the top-most one, keeping character formatting and bullets
 
+### Agenda Slides (`Ctrl+Shift+F` or `Alt-X-AG`)
+One shortcut builds and maintains a tracker agenda: a vertical line, a marker block beside the current item, and the current item in bold red (#CB2026).
+1. **No agenda yet**: inserts an agenda slide after the current slide with four placeholder rows. Type your sections into the table (press Tab in the last cell to add a row)
+2. **Fewer agenda slides than rows**: duplicates the agenda slide until there is one agenda slide per row, and highlights row 1, 2, 3... on them in order. Move each copy in front of its section
+3. **One agenda slide per row**: copies the current agenda slide's rows (text, sizes, colors) to every agenda slide and moves the highlight and marker, so the first agenda slide in the deck highlights row 1, the second row 2, and so on. Edit the agenda on any agenda slide and press `Ctrl+Shift+F` there to update all of them
+
+If there are more agenda slides than rows, it lists them so you can delete the extras. **Agenda colors...** (`Alt-X-AY`) changes the colors used for new agendas and can recolor the agenda slides in the open presentation; recoloring the marker or text on an agenda slide by hand also works, since updating copies the colors of the slide you run it from
+
 
 ## Miscellaneous
 

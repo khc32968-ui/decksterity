@@ -32,6 +32,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
     - **FormatHelper.cs**: Applies fill / line / text color and line weight to the selection
     - **PaletteStore.cs**: The palette (0xRRGGBB values) persisted in `HKCU\Software\Decksterity\Palette`; reads theme colors from a presentation or file
     - **PaletteEditorForm.cs**: Dialog for editing / importing the palette
+11. **Agenda slides** (Ctrl+Shift+F):
+    - **AgendaHelper.cs**: Inserts an agenda slide (title, vertical track line, marker rectangle, one-column table of items), duplicates it until there is one agenda slide per row, or flows the current agenda's rows to every agenda slide and moves the bold highlight and marker to row k on the k-th agenda slide. Agenda parts are found by the shape tag `DECKSTERITY_AGENDA` (ITEMS / TRACK / MARKER / TITLE); the items table also stores its highlighted row in `DECKSTERITY_AGENDA_ACTIVE`. Also holds `AgendaStyle`: the five colors (marker, track, current item, other items, dividers), default red #CB2026 / black / #D9D9D9, saved in `HKCU\Software\Decksterity\Agenda`; flowing reads the colors back from the source slide
+    - **AgendaStyleForm.cs**: Dialog for the agenda colors, optionally recoloring the open presentation's agenda slides
 
 ### Key Features
 
@@ -185,6 +188,7 @@ KeyboardHookManager.RemoveHook()     // Clean up on shutdown
 - **Ctrl+Shift+4**: Align Top
 - **Ctrl+Shift+5**: Align Middle
 - **Ctrl+Shift+6**: Align Bottom
+- **Ctrl+Shift+F**: Insert / duplicate / update agenda slides (AgendaHelper)
 
 **Hook Implementation**:
 1. **Hook Installation**: Uses SetWindowsHookEx with local thread ID
@@ -251,5 +255,6 @@ Releases are published by hand on GitHub (fork: khc32968-ui/decksterity) with th
 - ✅ **Color Support**: Full color support across all contexts
 - ✅ **MSI Installer**: Per-user WiX installer built by build.bat
 - ✅ **Keyboard Shortcuts**: Ctrl+Shift shortcuts for alignment, ordering, resizing and inserting elements
+- ✅ **Agenda Slides**: Ctrl+Shift+F inserts, duplicates and updates tracker agenda slides
 - ✅ **Color Pane**: Palette swatches for fill / line / text and a line-weight slider
 - ✅ **Public Distribution**: MSI attached to GitHub Releases
