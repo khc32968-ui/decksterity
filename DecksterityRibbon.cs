@@ -151,6 +151,10 @@ namespace decksterity
         public void SwapText(Office.IRibbonControl control) { ShapeToolsHelper.SwapText(); }
         public void MergeTextBoxes(Office.IRibbonControl control) { ShapeToolsHelper.MergeTextBoxes(); }
 
+        // Agenda slides (also Ctrl+Shift+F)
+        public void InsertOrUpdateAgenda(Office.IRibbonControl control) { AgendaHelper.InsertOrUpdateAgenda(); }
+        public void EditAgendaColors(Office.IRibbonControl control) { AgendaStyleForm.ShowEditor(); }
+
         #endregion
 
         #region Helpers

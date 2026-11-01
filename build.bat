@@ -5,7 +5,7 @@ rem and internet access on the first run (the WiX installer SDK comes from NuGet
 rem Everything is logged to build.log.
 setlocal
 cd /d "%~dp0"
-set "VERSION=1.1.0"
+set "VERSION=1.2.0"
 
 set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
 set "MSBUILD="

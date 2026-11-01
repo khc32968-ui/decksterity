@@ -149,6 +149,9 @@ namespace decksterity
                     case Keys.Q: SlideElementHelper.InsertQuote(); return true;
                     case Keys.A: SlideElementHelper.InsertStatusSticker(); return true;
                     case Keys.N: SlideElementHelper.InsertFootnote(); return true;
+
+                    // Agenda: insert, duplicate per row, or flow rows and highlight across agenda slides
+                    case Keys.F: AgendaHelper.InsertOrUpdateAgenda(); return true;
                 }
             }
             catch (Exception ex)
